@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Spelling Corrector</title>
+    <style>
+        body {
+            background: #f4f8fb;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+        .container {
+            width: 520px;
+            margin: 60px auto;
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px 36px;
+            box-shadow: 0 4px 24px rgba(44, 62, 80, 0.10);
+        }
+        h1 {
+            color: #2563eb;
+            margin-bottom: 18px;
+            letter-spacing: 1px;
+        }
+        textarea {
+            width: 100%;
+            font-size: 18px;
+            padding: 12px;
+            border: 1px solid #bcd0ee;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            background: #f7fafc;
+            resize: vertical;
+        }
+        input[type=file] {
+            margin-bottom: 18px;
+        }
+        input[type=submit] {
+            font-size: 18px;
+            background: #2563eb;
+            color: #fff;
+            border: none;
+            padding: 10px 28px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        input[type=submit]:hover {
+            background: #174ea6;
+        }
+        .result {
+            margin-top: 24px;
+            font-size: 20px;
+            color: #22223b;
+            background: #f1f5fb;
+            border-radius: 8px;
+            padding: 18px;
+        }
+        .original {
+            color: #6c757d;
+        }
+        .highlight {
+            background: #ffe066;
+            border-radius: 3px;
+            padding: 2px 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Spelling Checker</h1>
+        <form method="post" enctype="multipart/form-data">
+            <textarea name="text" placeholder="Enter text here">{{ original|default('') }}</textarea><br><br>
+            <input type="file" name="file" accept=".txt"><br><br>
+            <input type="submit" value="Check">
+        </form>
+        {% if highlighted %}
+            <div class="result">
+                <b>Original:</b> <span class="original">{{ original }}</span><br>
+                <b>Highlighted:</b> {{ highlighted|safe }}
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
